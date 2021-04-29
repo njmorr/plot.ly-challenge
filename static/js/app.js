@@ -12,6 +12,14 @@ function showMetaData(sampleId) {
     console.log(`showMetaData(${sampleId})`);
 }
 
+function optionChanged (newSampleId) {
+    console.log(`user selected ${newSampleId}`);
+
+    drawBarGraph(newSampleId);
+    drawBubbleChart(newSampleId);
+    showMetaData(newSampleId);   
+}
+
 
 function initDashboard() {
     console.log("initDashboard function called");

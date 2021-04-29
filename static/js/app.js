@@ -1,8 +1,15 @@
-console.log("the app.js file has loaded.")
+// Test to see if the data loads properly
+// console.log("the app.js file has loaded.")
 
+
+//////////////////////////////////////////////////
+// creates functions to draw the graphs/metadata
+
+// bar graph
 function drawBarGraph(sampleId) {
     console.log(`drawBarGraph(${sampleId})`);
 
+    // reads data into a function; creates variables for bar chart
     d3.json("data/samples.json").then(data => {
         // console.log(data);
         var samples =data.samples;
@@ -17,33 +24,41 @@ function drawBarGraph(sampleId) {
 
         yticks = otu_ids.slice(0,10).map(otuId => `OTU ${otuId}`).reverse();
 
+        // puts elements on bar chart into one variable
         var barData = {
             x: sample_values.slice(0,10).reverse(),
             y: yticks,
             type: "bar",
             text: otu_labels.slice(0,10).reverse(),
             orientation: "h"
-
         }
 
+        // puts bar chart variable into an array
         var barArray = [barData];
 
+        // set layout for bar chart
         var barLayout = {
             title: "Top 10 Bacteria Cultures Found",
             margin: {t: 30, l: 150}
         }
 
+        // plots bar chart
         Plotly.newPlot("bar", barArray, barLayout);
     });
 }
 
+// bubble Chart
 function drawBubbleChart(sampleId) {
     console.log(`drawBubbleChart(${sampleId})`);
 }
 
+// meta data
 function showMetaData(sampleId) {
     console.log(`showMetaData(${sampleId})`);
 }
+
+/////////////////////////////////////////////////////////
+// function to handle changing of user input
 
 function optionChanged (newSampleId) {
     console.log(`user selected ${newSampleId}`);
@@ -53,6 +68,8 @@ function optionChanged (newSampleId) {
     showMetaData(newSampleId);   
 }
 
+/////////////////////////////////////////////////////
+// initializing function
 
 function initDashboard() {
     console.log("initDashboard function called");
@@ -80,12 +97,6 @@ function initDashboard() {
 
 
     });
-
-    // Update the bar graph
-
-    // Update teh bubblechart
-
-    // update the demographic information
 }
 
 initDashboard()

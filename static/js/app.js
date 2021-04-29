@@ -2,6 +2,12 @@ console.log("the app.js file has loaded.")
 
 function drawBarGraph(sampleId) {
     console.log(`drawBarGraph(${sampleId})`);
+
+    d3.json("data/samples.json").then(data => {
+        console.log(data);
+        var samples =data.samples;
+        var resultArray = samples.filter(s => s.id == sampleId);
+    });
 }
 
 function drawBubbleChart(sampleId) {

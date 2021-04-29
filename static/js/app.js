@@ -68,35 +68,18 @@ function showMetaData(sampleId) {
         var location = metadataArray.location;
         var bbtype = metadataArray.bbtype;
         var wfreq = metadataArray.wfreq;
-        console.log(idee, ethnicity, gender, age, location, bbtype, wfreq);
+        // console.log(idee, ethnicity, gender, age, location, bbtype, wfreq);
 
-        // var otu_ids = result.otu_ids;
-        // var otu_labels = result.otu_labels;
-        // var sample_values = result.sample_values;
-        // console.log(otu_labels);
+        var metadataForSample = [{"id":idee, "ethnicity":ethnicity, "gender":gender, "age": age, "location":location, "bbtype":bbtype, "wfreq":wfreq}]
+        console.log(metadataForSample)
 
-        // yticks = otu_ids.slice(0,10).map(otuId => `OTU ${otuId}`).reverse();
+        d3.select("#sample-metadata")
+            .selectAll("ul")
+            .data(metadataForSample)
+            .append("li")
 
-        // puts elements on bar chart into one variable
-        // var barData = {
-        //     x: sample_values.slice(0,10).reverse(),
-        //     y: yticks,
-        //     type: "bar",
-        //     text: otu_labels.slice(0,10).reverse(),
-        //     orientation: "h"
-        // }
 
-        // // puts bar chart variable into an array
-        // var barArray = [barData];
-
-        // // set layout for bar chart
-        // var barLayout = {
-        //     title: "Top 10 Bacteria Cultures Found",
-        //     margin: {t: 30, l: 150}
-        // }
-
-        // // plots bar chart
-        // Plotly.newPlot("bar", barArray, barLayout);
+    
     });
 }
 
@@ -117,7 +100,7 @@ function optionChanged (newSampleId) {
 function initDashboard() {
     // console.log("initDashboard function called");
 
-    // Populate the dropdown menu
+    // Populate the dropdown menu and draw populate inital graphs/data
     var selector = d3.select("#selDataset");
 
     d3.json("data/samples.json").then(function(data){

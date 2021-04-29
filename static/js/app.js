@@ -15,13 +15,13 @@ function drawBarGraph(sampleId) {
         var sample_values = result.sample_values;
         // console.log(otu_labels);
 
-        yticks = otu_ids.slice(0,10).map(otuId => `OTU ${otuId}`); //TBD
+        yticks = otu_ids.slice(0,10).map(otuId => `OTU ${otuId}`).reverse();
 
         var barData = {
-            x: sample_values.slice(0,10), //TBD
+            x: sample_values.slice(0,10).reverse(),
             y: yticks,
-            type: bar,
-            text: otu_labels.slice(0,10),
+            type: "bar",
+            text: otu_labels.slice(0,10).reverse(),
             orientation: "h"
 
         }

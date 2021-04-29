@@ -112,10 +112,17 @@ function showMetaData(sampleId) {
         var metadataForSample = [{"id":idee, "ethnicity":ethnicity, "gender":gender, "age": age, "location":location, "bbtype":bbtype, "wfreq":wfreq}]
         console.log(metadataForSample)
 
-        d3.select("#sample-metadata")
-            .selectAll("ul")
-            .data(metadataForSample)
-            .append("li")
+        var metaData = d3.select("#sample-metadata");
+
+        metaData.html("");
+        
+        metaData.append("h6").text(`id: ${idee}`);
+        metaData.append("h6").text(`ethnicity: ${ethnicity}`);
+        metaData.append("h6").text(`gender: ${gender}`);
+        metaData.append("h6").text(`age: ${age}`);
+        metaData.append("h6").text(`location: ${location}`);
+        metaData.append("h6").text(`bbtype: ${bbtype}`);
+        metaData.append("h6").text(`wfreq: ${wfreq}`);
 
 
     

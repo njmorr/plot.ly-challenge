@@ -1,5 +1,18 @@
 console.log("the app.js file has loaded.")
 
+function drawBarGraph(sampleId) {
+    console.log(`drawBarGraph(${sampleId})`);
+}
+
+function drawBubbleChart(sampleId) {
+    console.log(`drawBubbleChart(${sampleId})`);
+}
+
+function showMetaData(sampleId) {
+    console.log(`showMetaData(${sampleId})`);
+}
+
+
 function initDashboard() {
     console.log("initDashboard function called");
 
@@ -14,9 +27,17 @@ function initDashboard() {
         sampleNames.forEach(sampleId =>{
             selector.append("option")
             .text(sampleId)
-            .property("value",sampleId)
+            .property("value",sampleId);
 
         });
+
+        var id = sampleNames[0];
+
+        drawBarGraph(id);
+        drawBubbleChart(id);
+        showMetaData(id);
+
+
     });
 
     // Update the bar graph

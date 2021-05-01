@@ -94,7 +94,7 @@ function drawBubbleChart(sampleId) {
 function showMetaData(sampleId) {
     console.log(`showMetaData(${sampleId})`);
 
-    // reads data into a function; creates variables for bar chart
+    // reads data into a function; creates variables for bubble chart
     d3.json("data/samples.json").then(data => {
         // console.log(data);
         var metadata = data.metadata;
@@ -122,11 +122,40 @@ function showMetaData(sampleId) {
         metaData.append("h6").text(`location: ${location}`);
         metaData.append("h6").text(`bbtype: ${bbtype}`);
         metaData.append("h6").text(`wfreq: ${wfreq}`);
-
-
     
     });
 }
+
+// Washing Frequency Gauge
+function showWashingGauge(sampleId) {
+
+    // reads data into a function; creates variables for guage
+    d3.json("data/samples.json").then(data => {
+        // console.log(data);
+        var metadata = data.metadata;
+        var metadataArray = metadata.filter(s => s.id == sampleId)[0];
+        var wfreq = metadataArray.wfreq;
+        console.log(wfreq);
+
+        // var metadataForSample = [{"id":idee, "ethnicity":ethnicity, "gender":gender, "age": age, "location":location, "bbtype":bbtype, "wfreq":wfreq}]
+        // console.log(metadataForSample)
+
+        // var metaData = d3.select("#sample-metadata");
+
+        // metaData.html("");
+        
+        // metaData.append("h6").text(`id: ${idee}`);
+        // metaData.append("h6").text(`ethnicity: ${ethnicity}`);
+        // metaData.append("h6").text(`gender: ${gender}`);
+        // metaData.append("h6").text(`age: ${age}`);
+        // metaData.append("h6").text(`location: ${location}`);
+        // metaData.append("h6").text(`bbtype: ${bbtype}`);
+        // metaData.append("h6").text(`wfreq: ${wfreq}`);
+    
+    });
+
+   }
+
 
 /////////////////////////////////////////////////////////
 // function to handle changing of user input
@@ -136,7 +165,8 @@ function optionChanged (newSampleId) {
 
     drawBarGraph(newSampleId);
     drawBubbleChart(newSampleId);
-    showMetaData(newSampleId);   
+    showMetaData(newSampleId);
+    showWashingGauge(newSampleId);   
 }
 
 /////////////////////////////////////////////////////
@@ -165,7 +195,7 @@ function initDashboard() {
         drawBarGraph(id);
         drawBubbleChart(id);
         showMetaData(id);
-
+        showWashingGauge(id);
 
     });
 }

@@ -49,7 +49,7 @@ function drawBarGraph(sampleId) {
 
 // bubble Chart
 function drawBubbleChart(sampleId) {
-    console.log(`drawBubbleChart(${sampleId})`);
+    // console.log(`drawBubbleChart(${sampleId})`);
 
     // reads data into a function; creates variables for bubble chart
     d3.json("data/samples.json").then(data => {
@@ -62,9 +62,9 @@ function drawBubbleChart(sampleId) {
         var otu_ids = result.otu_ids;
         var otu_labels = result.otu_labels;
         var sample_values = result.sample_values;
-        console.log(sample_values);
+        // console.log(sample_values);
 
-        // puts elements on bar chart into one variable
+        // puts elements on bubble chart into one variable
         var bubbleData = {
             x: otu_ids,
             y: sample_values,
@@ -92,9 +92,9 @@ function drawBubbleChart(sampleId) {
 
 // meta data
 function showMetaData(sampleId) {
-    console.log(`showMetaData(${sampleId})`);
+    // console.log(`showMetaData(${sampleId})`);
 
-    // reads data into a function; creates variables for bubble chart
+    // reads data into a function; creates variables for metadata list
     d3.json("data/samples.json").then(data => {
         // console.log(data);
         var metadata = data.metadata;
@@ -109,7 +109,7 @@ function showMetaData(sampleId) {
         // console.log(idee, ethnicity, gender, age, location, bbtype, wfreq);
 
         var metadataForSample = [{"id":idee, "ethnicity":ethnicity, "gender":gender, "age": age, "location":location, "bbtype":bbtype, "wfreq":wfreq}]
-        console.log(metadataForSample)
+        // console.log(metadataForSample)
 
         var metaData = d3.select("#sample-metadata");
 
@@ -137,17 +137,19 @@ function showWashingGauge(sampleId) {
         var wfreq = metadataArray.wfreq;
         // console.log(wfreq);
 
-        // puts elements on bar chart into one variable
+        // puts elements into one variable
         var gaugeData = {
             domain: {x:[0,1], y:[0,1]},
             value: wfreq,
-            title: {text:"belly buttion washings per week"},
+            title: {text:"Washings per Week"},
             type: "indicator",
             mode: "gauge+number",
+            
             gauge: {
                 axis: { range: [null, 9] },
+                bar: {color: "cadetblue"},
                 steps: [
-                  { range: [0, 1], color: "ghostwhite" },
+                  { range: [0, 1], color: "ghostwhite", labels: "0-1" },
                   { range: [1, 2], color: "lightyellow" },
                   { range: [2, 3], color: "lemonchiffon" },
                   { range: [3, 4], color: "palegoldenrod" },
@@ -156,16 +158,11 @@ function showWashingGauge(sampleId) {
                   { range: [6, 7], color: "olive" },
                   { range: [7, 8], color: "darkolivegreen" },
                   { range: [8, 9], color: "darkslategray" }
-                ],
-                // threshold: {
-                //   line: { color: "red", width: 4 },
-                //   thickness: 0.75,
-                //   value: 5
-                // }
+                ]
             }    
         }
 
-        // puts bubble chart variable into an array
+        // puts gauge variable into an array
         var gaugeArray = [gaugeData];
 
         // set layout for gauge
@@ -176,7 +173,7 @@ function showWashingGauge(sampleId) {
             height: 500
         }
 
-        // plots bubble chart
+        // plots gauge chart
         Plotly.newPlot("gauge", gaugeArray, gaugeLayout);
     
     });
@@ -188,7 +185,7 @@ function showWashingGauge(sampleId) {
 // function to handle changing of user input
 
 function optionChanged (newSampleId) {
-    console.log(`user selected ${newSampleId}`);
+    // console.log(`user selected ${newSampleId}`);
 
     drawBarGraph(newSampleId);
     drawBubbleChart(newSampleId);

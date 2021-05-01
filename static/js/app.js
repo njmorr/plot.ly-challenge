@@ -51,7 +51,7 @@ function drawBarGraph(sampleId) {
 function drawBubbleChart(sampleId) {
     console.log(`drawBubbleChart(${sampleId})`);
 
-    // reads data into a function; creates variables for bar chart
+    // reads data into a function; creates variables for bubble chart
     d3.json("data/samples.json").then(data => {
         // console.log(data);
         var samples = data.samples;
@@ -64,28 +64,29 @@ function drawBubbleChart(sampleId) {
         var sample_values = result.sample_values;
         console.log(sample_values);
 
-        yticks = otu_ids; //.slice(0,10).map(otuId => `OTU ${otuId}`).reverse();
-
         // puts elements on bar chart into one variable
         var bubbleData = {
             x: otu_ids,
             y: sample_values,
             mode: "markers",
-            marker: {size: sample_values},
+            marker: {size: sample_values,
+                    color: otu_ids},
             text: otu_labels
         }
 
-        // puts bar chart variable into an array
+        // puts bubble chart variable into an array
         var bubbleArray = [bubbleData];
 
-        // set layout for bar chart
+        // set layout for bubble chart
         var bubbleLayout = {
             title: "Bacteria Found in Bellybutton",
             margin: {t: 30, l: 150}
         }
 
-        // plots bar chart
+        // plots bubble chart
         Plotly.newPlot("bubble", bubbleArray, bubbleLayout);
+        // documentation: https://plotly.com/javascript/bubble-charts/
+        // accessed 30 April 2021
     });
 }
 

@@ -71,7 +71,7 @@ function drawBubbleChart(sampleId) {
             x: otu_ids,
             y: sample_values,
             mode: "markers",
-            marker: {sample_values},
+            marker: {size: sample_values},
             text: otu_labels
         }
 

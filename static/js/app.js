@@ -78,14 +78,14 @@ function drawBubbleChart(sampleId) {
         // puts bar chart variable into an array
         var bubbleArray = [bubbleData];
 
-    //     // set layout for bar chart
-        // var bubbleLayout = {
-    //         title: "Top 10 Bacteria Cultures Found",
-    //         margin: {t: 30, l: 150}
-    //     }
+        // set layout for bar chart
+        var bubbleLayout = {
+            title: "Bacteria Found in Bellybutton",
+            margin: {t: 30, l: 150}
+        }
 
-    //     // plots bar chart
-    //     Plotly.newPlot("bar", barArray, barLayout);
+        // plots bar chart
+        Plotly.newPlot("bubble", bubbleArray, bubbleLayout);
     });
 }
 

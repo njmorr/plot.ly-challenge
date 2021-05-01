@@ -135,22 +135,49 @@ function showWashingGauge(sampleId) {
         var metadata = data.metadata;
         var metadataArray = metadata.filter(s => s.id == sampleId)[0];
         var wfreq = metadataArray.wfreq;
-        console.log(wfreq);
+        // console.log(wfreq);
 
-        // var metadataForSample = [{"id":idee, "ethnicity":ethnicity, "gender":gender, "age": age, "location":location, "bbtype":bbtype, "wfreq":wfreq}]
-        // console.log(metadataForSample)
+        // puts elements on bar chart into one variable
+        var gaugeData = {
+            domain: {x:[0,1], y:[0,1]},
+            value: wfreq,
+            title: {text:"belly buttion washings per week"},
+            type: "indicator",
+            mode: "gauge+number",
+            gauge: {
+                axis: { range: [null, 9] },
+                steps: [
+                  { range: [0, 1], color: "ghostwhite" },
+                  { range: [1, 2], color: "lightyellow" },
+                  { range: [2, 3], color: "lemonchiffon" },
+                  { range: [3, 4], color: "palegoldenrod" },
+                  { range: [4, 5], color: "khaki" },
+                  { range: [5, 6], color: "darkkhaki" },
+                  { range: [6, 7], color: "olive" },
+                  { range: [7, 8], color: "darkolivegreen" },
+                  { range: [8, 9], color: "darkslategray" }
+                ],
+                // threshold: {
+                //   line: { color: "red", width: 4 },
+                //   thickness: 0.75,
+                //   value: 5
+                // }
+            }    
+        }
 
-        // var metaData = d3.select("#sample-metadata");
+        // puts bubble chart variable into an array
+        var gaugeArray = [gaugeData];
 
-        // metaData.html("");
-        
-        // metaData.append("h6").text(`id: ${idee}`);
-        // metaData.append("h6").text(`ethnicity: ${ethnicity}`);
-        // metaData.append("h6").text(`gender: ${gender}`);
-        // metaData.append("h6").text(`age: ${age}`);
-        // metaData.append("h6").text(`location: ${location}`);
-        // metaData.append("h6").text(`bbtype: ${bbtype}`);
-        // metaData.append("h6").text(`wfreq: ${wfreq}`);
+        // set layout for gauge
+        var gaugeLayout = {
+            title: "Belly Button Washing Frequency",
+            margin: {t: 30, l: 150},
+            width: 600,
+            height: 500
+        }
+
+        // plots bubble chart
+        Plotly.newPlot("gauge", gaugeArray, gaugeLayout);
     
     });
 
